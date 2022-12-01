@@ -185,25 +185,3 @@ class _home_sigState extends State<home_sig> {
     );
   }
 }
-
-
-
-// else if (emial_controller.text.toString() !=
-//                             users[i].uemail.toString() &&
-//                         pw_controller.text.toString() !=
-//                             users[i].upw.toString()) {
-//                       showDialog(
-//                         context: context,
-//                         builder: (context) => AlertDialog(
-//                           actions: [
-//                             CupertinoButton(
-//                                 child: Text('Done'),
-//                                 onPressed: () {
-//                                   Navigator.pop(context);
-//                                 })
-//                           ],
-//                           title: Container(child: Text('Please Sigin account')),
-//                           actionsAlignment: MainAxisAlignment.center,
-//                         ),
-//                       );
-//                     }
