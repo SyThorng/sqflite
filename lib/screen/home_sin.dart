@@ -102,30 +102,38 @@ class _home_sigState extends State<home_sig> {
                         context: context,
                         builder: (context) =>
                             AlertDialog(actions: [Text('Please Login')]));
+                  } else {
+                    for (var i = 0; i < users.length; i++) {
+                      if (emial_controller.text.toString() ==
+                              users[i].uemail.toString() &&
+                          pw_controller.text.toString() ==
+                              users[i].upw.toString()) {
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(actions: [
+                                  Lottie.network(
+                                      'https://assets5.lottiefiles.com/packages/lf20_uu0x8lqv.json'),
+                                  CupertinoButton(
+                                      child: Text('Done'),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => show(),
+                                            ));
+                                      })
+                                ]));
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  actionsAlignment: MainAxisAlignment.center,
+                                  actions: [Text('Wrong passwork')],
+                                ));
+                      }
+                      ;
                     }
-                  for (var i = 0; i < users.length; i++) {
-                    if (emial_controller.text.toString() ==
-                            users[i].uemail.toString() &&
-                        pw_controller.text.toString() ==
-                            users[i].upw.toString()) {
-                      showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(actions: [
-                                // Lottie.network(
-                                //     'https://assets5.lottiefiles.com/packages/lf20_uu0x8lqv.json'),
-                                CupertinoButton(
-                                    child: Text('Done'),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                      // Navigator.push(
-                                      //     context,
-                                      //     MaterialPageRoute(
-                                      //       builder: (context) => show(),
-                                      //     ));
-                                    })
-                              ]));
-                    }
-                    ;
                   }
                 },
                 child: const Text('Logo'),
