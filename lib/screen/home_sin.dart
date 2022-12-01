@@ -1,5 +1,6 @@
 import 'package:fb_sqlit/database/dbHelper.dart';
 import 'package:fb_sqlit/model/u_data.dart';
+import 'package:fb_sqlit/screen/facebook.dart';
 import 'package:fb_sqlit/screen/singup.dart';
 import 'package:fb_sqlit/show.dart';
 import 'package:flutter/cupertino.dart';
@@ -120,7 +121,7 @@ class _home_sigState extends State<home_sig> {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => show(),
+                                              builder: (context) => fb(),
                                             ));
                                       })
                                 ]));
