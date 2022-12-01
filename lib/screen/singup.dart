@@ -1,5 +1,6 @@
 import 'package:fb_sqlit/database/dbHelper.dart';
 import 'package:fb_sqlit/model/u_data.dart';
+import 'package:fb_sqlit/screen/home_sin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -19,6 +20,19 @@ class _singupState extends State<singup> {
   TextEditingController con_pw = TextEditingController();
 
   TextEditingController con_cf_pw = TextEditingController();
+  late Dbhelper db;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    db = Dbhelper();
+    db.getUser().then((value) {
+      setState(() {
+        // users = value;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +46,7 @@ class _singupState extends State<singup> {
               width: 500,
               height: 300,
               child: Lottie.network(
-                  'https://assets3.lottiefiles.c2om/packages/lf20_mjlh3hcy.json'),
+                  'https://assets3.lottiefiles.com/packages/lf20_u8o7BL.json'),
             ),
             const Text('Email'),
             Padding(
@@ -40,7 +54,7 @@ class _singupState extends State<singup> {
               child: Container(
                 child: TextField(
                   controller: con_emial,
-                  // keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     label: Text('Input Email'),
                     border: OutlineInputBorder(),
@@ -78,28 +92,60 @@ class _singupState extends State<singup> {
               ),
             ),
             CupertinoButton(
-                child: const Text('Sigup'),
+                child: Text(
+                  'Sigup',
+                  style: TextStyle(color: Colors.amber),
+                ),
                 onPressed: () async {
-                  await Dbhelper().insertUser(User(
-                      uemail: con_emial.text,
-                      upw: con_cf_pw.text == con_pw.text
-                          ? con_pw.text
-                          : con_cf_pw.text
-                      // != con_pw.text
-                      // ? showDialog(context: context, builder: (context) {
-                      //   return const AlertDialog(
-                      //     // title: Text('Field password'),
-                      //     actionsAlignment: MainAxisAlignment.center,
-                      //     actions: [
-                      //       Text('feild password')
-                      //     ],
-                      //   );
-                      // },)
-                      ));
+                  if (con_emial.text == '') {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        actionsAlignment: MainAxisAlignment.center,
+                        actions: [Text('Please Sigup')],
+                      ),
+                    );
+                  } else if (con_emial.text != '' &&
+                      con_pw.text != '' &&
+                      con_cf_pw.text != '') {
+                    if (con_cf_pw.text == con_pw.text && con_emial.text != '') {
+                      await Dbhelper().insertUser(
+                          User(uemail: con_emial.text, upw: con_pw.text));
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            actions: [
+                              Lottie.network(
+                                  'https://assets3.lottiefiles.com/packages/lf20_qr6rdacm.json'),
+                              CupertinoButton(
+                                  child: Text('Done'),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => home_sig(),
+                                        ));
+                                  })
+                            ],
+                          );
+                        },
+                      );
+                    } else if (con_cf_pw.text != con_pw.text) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          actions: [Text('Wrong passwod')],
+                        ),
+                      );
+                    }
+                  }
                 })
           ],
         ),
       ),
+      backgroundColor: Colors.grey,
     );
   }
 }

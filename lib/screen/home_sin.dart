@@ -27,16 +27,20 @@ class _home_sigState extends State<home_sig> {
   void initState() {
     super.initState();
     db = Dbhelper();
-    db.getUser();
+    db.getUser().then((value) {
+      setState(() {
+        users = value;
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.grey,
-      ),
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   backgroundColor: Colors.grey,
+      // ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,15 +73,8 @@ class _home_sigState extends State<home_sig> {
                 ),
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(20.0),
-            //   child: Container(
-            //     child: Text('Password'),
-            //   ),
-            // ),
             Container(
                 margin: EdgeInsets.only(left: 20), child: Text('password')),
-
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Container(
@@ -99,7 +96,33 @@ class _home_sigState extends State<home_sig> {
             Center(
               child: MaterialButton(
                 minWidth: 330,
-                onPressed: () {},
+                onPressed: () {
+                  for (var i = 0; i < users.length; i++) {
+                    if (emial_controller.text.toString() ==
+                            users[i].uemail.toString() &&
+                        pw_controller.text.toString() ==
+                            users[i].upw.toString()) {
+                      showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(actions: [
+                                // Lottie.network(
+                                //     'https://assets5.lottiefiles.com/packages/lf20_uu0x8lqv.json'),
+                                CupertinoButton(
+                                    child: Text('Done'),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => show(),
+                                          ));
+                                    })
+                              ]));
+                    }
+                    ;
+                  }
+                },
                 child: const Text('Logo'),
                 color: Colors.blue,
               ),
@@ -133,6 +156,16 @@ class _home_sigState extends State<home_sig> {
             )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => show(),
+              ));
+        },
+        child: Icon(Icons.show_chart),
       ),
       backgroundColor: Colors.grey,
     );
