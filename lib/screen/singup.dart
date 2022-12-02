@@ -25,6 +25,7 @@ class _singupState extends State<singup> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    con_emial.text = '@gmail.com';
 
     db = Dbhelper();
     db.getUser().then((value) {

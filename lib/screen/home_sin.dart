@@ -10,7 +10,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:lottie/lottie.dart';
 
 class home_sig extends StatefulWidget {
-  home_sig({super.key});
+  home_sig({
+    super.key,
+  });
 
   @override
   State<home_sig> createState() => _home_sigState();
@@ -26,6 +28,7 @@ class _home_sigState extends State<home_sig> {
 
   @override
   void initState() {
+    var name = emial_controller.text;
     super.initState();
     db = Dbhelper();
     db.getUser().then((value) {
@@ -33,6 +36,7 @@ class _home_sigState extends State<home_sig> {
         users = value;
       });
     });
+    emial_controller.text = '@gmail.com';
   }
 
   @override
@@ -57,7 +61,9 @@ class _home_sigState extends State<home_sig> {
               ),
             ),
 
-            Container(margin: EdgeInsets.only(left: 20), child: Text('Email')),
+            Container(
+                margin: const EdgeInsets.only(left: 20),
+                child: const Text('Email')),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Container(
@@ -65,8 +71,8 @@ class _home_sigState extends State<home_sig> {
                   controller: emial_controller,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.email),
-                    label: Text('Input Email'),
+                    prefixIcon: const Icon(Icons.email),
+                    label: const Text('Input Email'),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -75,7 +81,8 @@ class _home_sigState extends State<home_sig> {
               ),
             ),
             Container(
-                margin: EdgeInsets.only(left: 20), child: Text('password')),
+                margin: const EdgeInsets.only(left: 20),
+                child: const Text('password')),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Container(
@@ -85,8 +92,8 @@ class _home_sigState extends State<home_sig> {
                   cursorColor: Colors.red,
                   obscureText: true,
                   decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock),
-                    label: Text('Input password'),
+                    prefixIcon: const Icon(Icons.lock),
+                    label: const Text('Input password'),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -98,12 +105,14 @@ class _home_sigState extends State<home_sig> {
               child: MaterialButton(
                 minWidth: 330,
                 onPressed: () {
-                  if (emial_controller.text == '' && pw_controller.text == '') {
+                  if (emial_controller.text == '' || pw_controller.text == '') {
                     showDialog(
                         context: context,
-                        builder: (context) => AlertDialog(actions: [
-                              Text('Please Login'),
-                            ]));
+                        builder: (context) => const AlertDialog(
+                                actionsAlignment: MainAxisAlignment.center,
+                                actions: [
+                                  Text('Please Login'),
+                                ]));
                   } else {
                     for (var i = 0; i < users.length; i++) {
                       if (emial_controller.text.toString() ==
@@ -116,7 +125,7 @@ class _home_sigState extends State<home_sig> {
                                   Lottie.network(
                                       'https://assets5.lottiefiles.com/packages/lf20_uu0x8lqv.json'),
                                   CupertinoButton(
-                                      child: Text('Done'),
+                                      child: const Text('Done'),
                                       onPressed: () {
                                         Navigator.pop(context);
                                         Navigator.push(
@@ -129,7 +138,7 @@ class _home_sigState extends State<home_sig> {
                       } else {
                         showDialog(
                             context: context,
-                            builder: (context) => AlertDialog(
+                            builder: (context) => const AlertDialog(
                                   actionsAlignment: MainAxisAlignment.center,
                                   actions: [Text('Wrong passwork')],
                                 ));
@@ -151,7 +160,7 @@ class _home_sigState extends State<home_sig> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    child: Text('Do your have account?'),
+                    child: const Text('Do your have account?'),
                   ),
                   Container(
                       child: CupertinoButton(
@@ -180,7 +189,7 @@ class _home_sigState extends State<home_sig> {
                 builder: (context) => show(),
               ));
         },
-        child: Icon(Icons.show_chart),
+        child: const Icon(Icons.show_chart),
       ),
       backgroundColor: Colors.grey,
     );

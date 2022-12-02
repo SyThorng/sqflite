@@ -1,3 +1,4 @@
+import 'package:fb_sqlit/screen/page_post.dart';
 import 'package:fb_sqlit/screen/singup.dart';
 import 'package:fb_sqlit/screen/home_sin.dart';
 import 'package:fb_sqlit/show.dart';

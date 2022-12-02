@@ -11,6 +11,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:quickalert/quickalert.dart';
+import 'package:fb_sqlit/screen/home_sin.dart';
 
 class fb extends StatefulWidget {
   fb({super.key});
@@ -30,7 +32,7 @@ class _fbState extends State<fb> {
   //     fileImage = File(widget.user.uimg.toString());
   //   });
   // }
-
+  var i = 0;
   @override
   void initState() {
     super.initState();
@@ -142,7 +144,7 @@ class _fbState extends State<fb> {
                             if (_con_cap.text == '') {
                               showDialog(
                                 context: context,
-                                builder: (context) => AlertDialog(
+                                builder: (context) => const AlertDialog(
                                   actionsAlignment: MainAxisAlignment.center,
                                   actions: [
                                     Text('Cannot post , plz input caption')
@@ -151,24 +153,32 @@ class _fbState extends State<fb> {
                               );
                             } else {
                               Dbhelper().insertUser(User(
-                                  uemail: 'Admin post',
+                                  uemail: users[i].uemail,
                                   ucap: _con_cap.text,
                                   uimg: fileImage!.path.toString()));
+
                               showDialog(
                                 context: context,
                                 builder: (context) => AlertDialog(
                                   actionsAlignment: MainAxisAlignment.center,
                                   actions: [
-                                    Text('Welcome'),
-                                    CupertinoButton(
-                                        child: Text('done'),
-                                        onPressed: (() {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) => post(),
-                                              ));
-                                        }))
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Lottie.network(
+                                            'https://assets9.lottiefiles.com/packages/lf20_vxtEG7.json'),
+                                        CupertinoButton(
+                                            child: Text('done'),
+                                            onPressed: (() {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        post(),
+                                                  ));
+                                            })),
+                                      ],
+                                    )
                                   ],
                                 ),
                               );
