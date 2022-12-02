@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:fb_sqlit/database/dbHelper.dart';
 import 'package:fb_sqlit/model/u_data.dart';
+import 'package:fb_sqlit/screen/home_sin.dart';
+import 'package:fb_sqlit/screen/page_post.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -11,12 +13,36 @@ import 'package:lottie/lottie.dart';
 import 'package:image_picker/image_picker.dart';
 
 class fb extends StatefulWidget {
-  const fb({super.key});
+  fb({super.key});
+
+  User? user;
+
   @override
   State<fb> createState() => _fbState();
 }
 
 class _fbState extends State<fb> {
+  var db = Dbhelper();
+  List<User> users = [];
+
+  // getUserupdate() {
+  //   setState(() {
+  //     fileImage = File(widget.user.uimg.toString());
+  //   });
+  // }
+
+  @override
+  void initState() {
+    super.initState();
+    db = Dbhelper();
+    db.getUser();
+    db.getUser().then((value) {
+      setState(() {
+        users = value;
+      });
+    });
+  }
+
   TextEditingController _con_cap = TextEditingController();
   File? fileImage;
 
@@ -128,6 +154,24 @@ class _fbState extends State<fb> {
                                   uemail: 'Admin post',
                                   ucap: _con_cap.text,
                                   uimg: fileImage!.path.toString()));
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  actionsAlignment: MainAxisAlignment.center,
+                                  actions: [
+                                    Text('Welcome'),
+                                    CupertinoButton(
+                                        child: Text('done'),
+                                        onPressed: (() {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => post(),
+                                              ));
+                                        }))
+                                  ],
+                                ),
+                              );
                             }
                           },
                           child: Row(
