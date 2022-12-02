@@ -9,7 +9,6 @@ import 'package:lottie/lottie.dart';
 
 class fb extends StatefulWidget {
   const fb({super.key});
-
   @override
   State<fb> createState() => _fbState();
 }
