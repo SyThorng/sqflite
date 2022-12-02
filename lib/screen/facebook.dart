@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -9,10 +10,127 @@ class fb extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Lottie.network(
-            'https://assets1.lottiefiles.com/packages/lf20_swtpoqxk.json'),
+      body: Column(
+        children: [
+          const SizedBox(
+            height: 70,
+          ),
+          Center(
+            child: Container(
+              width: 300,
+              height: 400,
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(50),
+                    bottomRight: Radius.circular(50),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 20,
+                      color: Colors.blue,
+                      offset: Offset(20, 20),
+                    ),
+                    BoxShadow(
+                      blurRadius: 20,
+                      color: Colors.blue,
+                      offset: Offset(-10, -10),
+                    )
+                  ]),
+              padding: const EdgeInsets.all(50),
+              child: Lottie.network(
+                  'https://assets1.lottiefiles.com/packages/lf20_swtpoqxk.json'),
+            ),
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          // MaterialButton(
+          //   elevation: 20,
+          //   onPressed: () {},
+          //   child: const Text('Create Post'),
+          //   color: Colors.blue,
+          // )
+          Container(
+            child: ElevatedButton(
+              onPressed: () {
+                Bottomsheet(context);
+              },
+              child: Text('Create Post'),
+            ),
+          )
+        ],
       ),
     );
   }
+}
+
+void Bottomsheet(context) {
+  showModalBottomSheet(
+    backgroundColor: Colors.grey,
+    context: context,
+    builder: (context) => Container(
+      height: 600,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+        color: Colors.grey,
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.person,
+                    size: 30,
+                  ),
+                ),
+              ),
+              Text('Admin'),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  margin: EdgeInsets.only(left: 100),
+                  width: 60,
+                  child: MaterialButton(
+                    child: Icon(
+                      Icons.camera_alt,
+                      color: Colors.blue,
+                    ),
+                    onPressed: () {},
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  width: 60,
+                  child: MaterialButton(
+                    child: Icon(
+                      Icons.photo,
+                      color: Colors.blue,
+                    ),
+                    onPressed: () {},
+                    color: Colors.white,
+                  ),
+                ),
+              )
+            ],
+          )
+        ],
+      ),
+    ),
+  );
 }
