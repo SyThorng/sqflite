@@ -18,7 +18,6 @@ class fb extends StatefulWidget {
 
 class _fbState extends State<fb> {
   TextEditingController _con_cap = TextEditingController();
-
   File? fileImage;
 
   Future openCamera() async {
@@ -114,9 +113,22 @@ class _fbState extends State<fb> {
                         child: MaterialButton(
                           color: Colors.white,
                           onPressed: () async {
-                            await Dbhelper().insertUser(User(
-                                ucap: _con_cap.text,
-                                uimg: fileImage!.path.toString()));
+                            if (_con_cap.text == '') {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  actionsAlignment: MainAxisAlignment.center,
+                                  actions: [
+                                    Text('Cannot post,plz input caption')
+                                  ],
+                                ),
+                              );
+                            } else {
+                              Dbhelper().insertUser(User(
+                                  uemail: 'Admin post',
+                                  ucap: _con_cap.text,
+                                  uimg: fileImage!.path.toString()));
+                            }
                           },
                           child: Row(
                             children: [

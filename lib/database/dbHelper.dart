@@ -13,7 +13,7 @@ class Dbhelper {
       join(path, 'Userdatabase.db'),
       onCreate: (database, version) async {
         await database.execute(
-          'CREATE TABLE $tblname($fuemail TEXT,$fupw TEXT)',
+          'CREATE TABLE $tblname($fuemail TEXT,$fupw TEXT,$fuimg TEXT,$fucap TEXT)',
         );
       },
       version: 1,

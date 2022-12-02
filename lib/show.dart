@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fb_sqlit/database/dbHelper.dart';
 import 'package:fb_sqlit/model/u_data.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +41,9 @@ class _showState extends State<show> {
               onTap: () {},
               title: Text(users[index].uemail.toString()),
               subtitle: Text(users[index].upw.toString()),
-
+              // leading: CircleAvatar(
+              //   backgroundImage: FileImage(File(users[index].uimg.toString())),
+              // ),
               //show ID that we use as Auto ID
               // leading: CircleAvatar(child: Text(users[index].uid.toString())),
 
