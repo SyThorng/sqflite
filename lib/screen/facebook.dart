@@ -119,7 +119,7 @@ class _fbState extends State<fb> {
                                 builder: (context) => AlertDialog(
                                   actionsAlignment: MainAxisAlignment.center,
                                   actions: [
-                                    Text('Cannot post,plz input caption')
+                                    Text('Cannot post , plz input caption')
                                   ],
                                 ),
                               );
