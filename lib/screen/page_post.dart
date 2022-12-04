@@ -5,6 +5,7 @@ import 'package:fb_sqlit/model/u_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class post extends StatefulWidget {
   post({super.key});
@@ -14,10 +15,14 @@ class post extends StatefulWidget {
 }
 
 class _postState extends State<post> {
+  int select = 0;
+  // List<Color> colr = [Colors.blue];
   File? fileImage;
   dynamic col = Colors.white;
   List<User> users = [];
   late Dbhelper db;
+  late User user;
+
   @override
   void initState() {
     super.initState();
@@ -32,8 +37,81 @@ class _postState extends State<post> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
-      appBar: AppBar(),
+      // drawer: Drawer(),
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: select,
+          onTap: (value) {
+            setState(() {
+              value = select;
+            });
+          },
+          items: const [
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home,
+                ),
+                label: 'Home'),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.group,
+                ),
+                label: 'Friend'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.person_pin), label: 'menu'),
+          ]),
+      appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: Row(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(right: 10),
+                  alignment: Alignment.center,
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.grey,
+                  ),
+                  child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.search,
+                        color: Colors.black,
+                      )),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.grey,
+                  ),
+                  child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.message_sharp,
+                        color: Colors.black,
+                      )),
+                )
+              ],
+            ),
+          )
+        ],
+        backgroundColor: Color.fromARGB(0, 238, 234, 234),
+        elevation: 0,
+        leadingWidth: 130,
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'facebook',
+            style: GoogleFonts.actor(
+                fontSize: 25, fontWeight: FontWeight.bold, color: Colors.blue),
+          ),
+        ),
+      ),
       body: ListView.builder(
         itemCount: users.length,
         itemBuilder: (context, index) {
@@ -126,7 +204,7 @@ class _postState extends State<post> {
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
                           width: double.infinity,
-                          height: 30,
+                          height: 35,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(

@@ -17,21 +17,26 @@ import 'package:fb_sqlit/screen/home_sin.dart';
 class fb extends StatefulWidget {
   fb({super.key});
 
-  User? user;
-
   @override
   State<fb> createState() => _fbState();
 }
 
 class _fbState extends State<fb> {
+  late User user;
+
   var db = Dbhelper();
   List<User> users = [];
-
   // getUserupdate() {
   //   setState(() {
   //     fileImage = File(widget.user.uimg.toString());
   //   });
   // }
+  // getUserupdate() {
+  //   setState(() {
+  //     fileImage = File(widget.users.uimg.toString());
+  //   });
+  // }
+
   var i = 0;
   @override
   void initState() {
@@ -170,6 +175,7 @@ class _fbState extends State<fb> {
                                         CupertinoButton(
                                             child: Text('done'),
                                             onPressed: (() {
+                                              Navigator.pop(context);
                                               Navigator.push(
                                                   context,
                                                   MaterialPageRoute(

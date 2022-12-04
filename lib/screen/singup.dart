@@ -110,8 +110,11 @@ class _singupState extends State<singup> {
                       con_pw.text != '' &&
                       con_cf_pw.text != '') {
                     if (con_cf_pw.text == con_pw.text && con_emial.text != '') {
-                      await Dbhelper().insertUser(
-                          User(uemail: con_emial.text, upw: con_pw.text));
+                      await Dbhelper().insertUser(User(
+                          uemail: con_emial.text,
+                          upw: con_pw.text,
+                          ucap: 'No caption',
+                          uimg: 'N/A'));
                       showDialog(
                         context: context,
                         builder: (context) {
