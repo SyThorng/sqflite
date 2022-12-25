@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:fb_sqlit/amin.dart';
 import 'package:fb_sqlit/database/dbHelper.dart';
 import 'package:fb_sqlit/model/u_data.dart';
 import 'package:fb_sqlit/screen/facebook.dart';
@@ -54,14 +55,24 @@ class _home_sigState extends State<home_sig> {
             ),
             Container(
                 margin: EdgeInsets.only(left: 300, top: 10),
-                child: TextButton(onPressed: () {}, child: Text('Admin'))),
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => admin(),
+                          ));
+                    },
+                    child: Text('Admin'))),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
                 width: double.infinity,
                 height: 220,
-                child: Lottie.network(
-                    'https://assets6.lottiefiles.com/packages/lf20_xwabp3dh.json'),
+                decoration: BoxDecoration(
+                    image: DecorationImage(image: AssetImage('assets/up.gif'))),
+                // child: Lottie.network(
+                //     'https://assets6.lottiefiles.com/packages/lf20_xwabp3dh.json'),
               ),
             ),
 
@@ -195,7 +206,7 @@ class _home_sigState extends State<home_sig> {
         },
         child: const Icon(Icons.show_chart),
       ),
-      backgroundColor: Colors.grey,
+      // backgroundColor: Colors.grey,
     );
   }
 }
