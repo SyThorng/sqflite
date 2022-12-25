@@ -1,3 +1,4 @@
+import 'package:fb_sqlit/amin.dart';
 import 'package:fb_sqlit/screen/page_post.dart';
 import 'package:fb_sqlit/screen/singup.dart';
 import 'package:fb_sqlit/screen/home_sin.dart';
@@ -14,7 +15,8 @@ class home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: home_sig(),
+      // home: home_sig(),
+      home: admin(),
       debugShowCheckedModeBanner: false,
     );
   }

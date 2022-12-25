@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fb_sqlit/database/dbHelper.dart';
 import 'package:fb_sqlit/model/u_data.dart';
 import 'package:fb_sqlit/screen/facebook.dart';
@@ -42,20 +44,22 @@ class _home_sigState extends State<home_sig> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   elevation: 0,
-      //   backgroundColor: Colors.grey,
-      // ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(
+              height: 30,
+            ),
+            Container(
+                margin: EdgeInsets.only(left: 300, top: 10),
+                child: TextButton(onPressed: () {}, child: Text('Admin'))),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
                 width: double.infinity,
-                height: 250,
+                height: 220,
                 child: Lottie.network(
                     'https://assets6.lottiefiles.com/packages/lf20_xwabp3dh.json'),
               ),
